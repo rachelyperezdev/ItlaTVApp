@@ -1,0 +1,99 @@
+﻿@using ItlaTVApp.Core.Application.ViewModels.Series;
+@model SaveSerieViewModel;
+@{
+    bool editMode = Model.Id != 0 ? true : false;
+
+    if (editMode)
+    {
+        ViewData["Title"] = "Editar Serie";
+    }
+    else
+    {
+        ViewData["Title"] = "Crear Serie";
+    }
+
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <div class="card bg-secondary bg-opacity-10 border-0 rounded-3">
+                <div class="card-header bg-secondary bg-opacity-10 text-light p-2">
+                    <h4 class="m-2">@(editMode ? $"Edita la serie {Model.Nombre}" : "Crea una nueva serie")</h4>
+                </div>
+                <div class="card-body">
+                    @if (Model.Productora == null || Model.Productora.Count == 0)
+                    {
+                        if (Model.GenerosPrimarios == null || Model.GenerosPrimarios.Count == 0 || Model.GenerosSecundarios == null || Model.GenerosSecundarios.Count == 0)
+                        {
+                            <p class="text-light">No hay productoras ni géneros creados.</p>
+                            <a asp-controller="Serie" asp-action="Index" class="btn btn-outline-primary float-end m-2">Volver atrás</a>
+                        }
+                        else
+                        {
+                            <p class="text-light">No hay productoras creadas.</p>
+                            <a asp-controller="Serie" asp-action="Index" class="btn btn-outline-primary float-end m-2">Volver atrás</a>
+                        }
+                    }
+                    else if (Model.GenerosPrimarios == null || Model.GenerosPrimarios.Count == 0 || Model.GenerosSecundarios == null || Model.GenerosSecundarios.Count == 0)
+                    {
+                        <p class="text-light">No hay géneros creados.</p>
+                        <a asp-controller="Serie" asp-action="Index" class="btn btn-outline-primary float-end m-2">Volver atrás</a>
+                    }
+                    else
+                    {
+                        <form method="post" asp-controller="Serie" asp-action="@(editMode ? "Edit" : "Create")">
+                            <div class="mb-3">
+                                <label asp-for="Nombre" class="form-label text-light">Nombre</label>
+                                <input type="text" asp-for="Nombre" class="form-control custom-input bg-secondary bg-opacity-10 text-light" />
+                                <span asp-validation-for="Nombre" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="URLImagen" class="form-label text-light">Enlace de la imagen de portada</label>
+                                <input type="text" asp-for="URLImagen" class="form-control custom-input bg-secondary bg-opacity-10 text-light" />
+                                <span asp-validation-for="URLImagen" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="URLVideo" class="form-label text-light">Enlace del video de la serie</label>
+                                <input type="text" asp-for="URLVideo" class="form-control custom-input bg-secondary bg-opacity-10 text-light" />
+                                <span asp-validation-for="URLVideo" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="ProductoraId" class="form-label text-light">Productora</label>
+                                <select asp-for="ProductoraId" asp-items="@(new SelectList(Model.Productora, "Id", "Nombre"))" class="custom-form-select text-light">
+                                    <option value="0">Seleccione una Productora</option>
+                                </select>
+                                <span asp-validation-for="ProductoraId" class="text-danger"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="GeneroPrimarioId" class="form-label text-light">Género Primario</label>
+                                <select asp-for="GeneroPrimarioId" asp-items="@(new SelectList(Model.GenerosPrimarios,"Id", "Nombre"))" class="custom-form-select text-light">
+                                    <option value="0">Seleccione un Género Primario</option>
+                                </select>
+                                <span asp-validation-for="GeneroPrimarioId" class="text-danger"></span>
+                            </div>
+
+
+                            <div class="mb-3">
+                                <label asp-for="GeneroSecundarioId" class="form-label text-light">Género Secundario</label>
+                                <select asp-for="GeneroSecundarioId" asp-items="@(new SelectList(Model.GenerosSecundarios,"Id", "Nombre"))" class="custom-form-select text-light">
+                                    <option value="0">Seleccione un Género Secundario</option>
+                                </select>
+                            </div>
+
+                            <input type="hidden" asp-for="Id" />
+                            <div class="d-flex justify-content-end">
+                                <a asp-controller="Serie" asp-action="Index" class="btn btn-outline-primary m-2">Volver atrás</a>
+                                <button type="submit" class="btn btn-primary m-2">Guardar</button>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

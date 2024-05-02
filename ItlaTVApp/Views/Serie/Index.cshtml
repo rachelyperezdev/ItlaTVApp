@@ -1,0 +1,43 @@
+﻿@using ItlaTVApp.Core.Application.ViewModels.Series;
+@model List<SerieViewModel>;
+
+@{
+    ViewData["Title"] = "Series";
+}
+
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-3 offset-9">
+            <a asp-controller="Serie" asp-action="Create" class="btn btn-primary bg-gradient float-end">Crear nueva Serie</a>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <h1 class="text-light display-4 fw-bold">Mantenimiento de Series</h1>
+    </div>
+    <div class="row mb-3 bg-black bg-opacity-10 rounded p-4">
+        @if (Model == null || Model.Count == 0)
+        {
+            <h2 class="text-light">No hay series disponibles.</h2>
+        }
+        else
+        {
+            @foreach (SerieViewModel serie in Model)
+            {
+                <div class="col-md-4 d-flex align-items-stretch">
+                    <div class="card text-light mb-4 bg-secondary bg-opacity-10 box-shadow flex-fill">
+                        <img class="custom-image bd-placeholder-img card-img-top img-product-size" src="@serie.URLImagen" />
+                        <div class="card-body d-flex flex-column">
+                            <h4 class="text-light">@serie.Nombre</h4>
+                            <p class="card-text">@serie.GeneroPrimario | @serie.GeneroSecundario</p>
+                            <p class="card-text">@serie.Productora</p>
+                            <div class="d-flex justify-content-end">
+                                <a asp-controller="Serie" asp-action="Delete" asp-route-id="@serie.Id" class="btn btn-sm btn-outline-danger m-2">Eliminar</a>
+                                <a asp-controller="Serie" asp-action="Edit" asp-route-id="@serie.Id" class="btn btn-sm btn-outline-info m-2">Editar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

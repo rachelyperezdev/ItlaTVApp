@@ -1,0 +1,41 @@
+﻿@using ItlaTVApp.Core.Application.ViewModels.Productoras;
+@model List<ProductoraViewModel>;
+@{
+    ViewData["Title"] = "Productoras";
+}
+
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-3 offset-9">
+            <a asp-controller="Productora" asp-action="Create" class="btn btn-primary bg-gradient float-end">Crear nueva Productora</a>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <h1 class="text-light display-4 fw-bold">Mantenimiento de Productoras</h1>
+    </div>
+    <div class="row mb-3">
+        <table class="table table-striped text-white">
+            <thead>
+                <tr>
+                    <th scope="col">PRODUCTORA</th>
+                    <th scope="col">EDITAR</th>
+                    <th scope="col">ELIMINAR</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ProductoraViewModel productora in Model)
+                {
+                    <tr class="text-white">
+                        <td scope="row">@productora.Nombre</td>
+                        <td>
+                            <a asp-controller="Productora" asp-action="Edit" asp-route-id="@productora.Id" class="btn btn-sm btn-outline-info">Editar</a>
+                        </td>
+                        <td>
+                            <a asp-controller="Productora" asp-action="Delete" asp-route-id="@productora.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

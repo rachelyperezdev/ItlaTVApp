@@ -1,0 +1,24 @@
+﻿@using ItlaTVApp.Core.Application.ViewModels.Series;
+@model SaveSerieViewModel;
+@{
+    ViewData["Title"] = "Eliminar Serie";
+}
+
+<div class="container-fluid d-flex align-items-center justify-content-center custom-height rounded">
+    <div class="row rounded">
+        <div class="card bg-black bg-opacity-10 rounded border-0 box-shadow">
+            <div class="card-header bg-secondary bg-opacity-25 text-light">
+                <h4 class="text-light m-2">¿Estás seguro que quieres eliminar la serie @Model.Nombre?</h4>
+            </div>
+            <div class="card-body bg-secondary bg-opacity-10 rounded-bottom">
+                <div class="d-flex justify-content-end rounded-bottom">
+                    <form method="post" asp-controller="Serie" asp-action="DeletePost">
+                        <input type="hidden" asp-for="Id" />
+                        <a asp-controller="Serie" asp-action="Index" class="btn btn-outline-warning m-2">Cancelar</a>
+                        <button type="submit" class="btn btn-danger m-2">Aceptar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+﻿@model ItlaTVApp.Core.Application.ViewModels.Series.SaveSerieViewModel;
+
+@{
+    ViewData["Title"] = "Detalles";
+}
+
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-3 offset-9">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary float-end">Volver a Home</a>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <h1 class="text-light display-4 fw-bold">@Model.Nombre</h1>
+    </div>
+    <div class="row mb-3">
+        <div class="ratio ratio-21x9">
+            <iframe src="@Model.URLVideo" title="@Model.Nombre" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>

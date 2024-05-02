@@ -1,0 +1,42 @@
+﻿@using ItlaTVApp.Core.Application.ViewModels.Generos;
+@model List<GeneroViewModel>;
+
+@{
+    ViewData["Title"] = "Géneros";
+}
+
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-3 offset-9">
+            <a asp-controller="Genero" asp-action="Create" class="btn btn-primary bg-gradient float-end">Crear nuevo Género</a>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <h1 class="text-light display-4 fw-bold">Mantenimiento de Géneros</h1>
+    </div>
+    <div class="row mb-3">
+        <table class="table table-striped text-white">
+            <thead>
+                <tr>
+                    <th scope="col">GÉNEROS</th>
+                    <th scope="col">EDITAR</th>
+                    <th scope="col">ELIMINAR</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (GeneroViewModel genero in Model)
+                {
+                    <tr class="text-white">
+                        <td scope="row">@genero.Nombre</td>
+                        <td>
+                            <a asp-controller="Genero" asp-action="Edit" asp-route-id="@genero.Id" class="btn btn-sm btn-outline-info">Editar</a>
+                        </td>
+                        <td>
+                            <a asp-controller="Genero" asp-action="Delete" asp-route-id="@genero.Id" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

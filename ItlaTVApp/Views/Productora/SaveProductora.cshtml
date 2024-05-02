@@ -1,0 +1,42 @@
+﻿@using ItlaTVApp.Core.Application.ViewModels.Productoras
+@model SaveProductoraViewModel;
+@{
+    bool editMode = Model.Id != 0 ? true : false;
+
+    if (editMode)
+    {
+        ViewData["Title"] = "Editar Productora";
+    }
+    else
+    {
+        ViewData["Title"] = "Crear Productora";
+    }
+}
+
+<div class="container-fluid custom-row-height">
+    <div class="row w-100">
+        <div class="col-6 offset-3">
+            <div class="card bg-secondary bg-opacity-10 border-0 rounded-3">
+                <div class="card-header bg-secondary bg-opacity-10 text-light p-2">
+                    <h4 class="m-2">@(editMode ? $"Edita la productora {Model.Nombre}" : "Crea una nueva productora")</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="Productora" asp-action="@(editMode ? "Edit" : "Create")">
+                        <div class="mb-3">
+                            <label asp-for="Nombre" class="form-label text-light">Nombre</label>
+                            <input type="text" asp-for="Nombre" class="form-control custom-input bg-secondary bg-opacity-10 text-light" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="d-flex justify-content-end">
+                            <a asp-controller="Productora" asp-action="Index" class="btn btn-outline-primary m-2">Volver atrás</a>
+                            <button type="submit" class="btn btn-primary m-2">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
