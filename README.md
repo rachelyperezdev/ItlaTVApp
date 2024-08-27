@@ -102,7 +102,26 @@ Forms includes validation for required fields.
     
 ## Getting started
 
-### Prerequisites 
+### Prerequisites
 
-* [.Net Core SDK](https://dotnet.microsoft.com/en-us/download)
+* [.Net Core 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 * [Visual Studio](https://visualstudio.microsoft.com/) or any preferred IDE for ASP.NET Core development
+* [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+
+### Installation
+
+1. Clone the repository
+```
+git clone https://github.com/rachelyperezdev/ItlaTVApp.git
+cd ItlaTVApp
+```
+2. Set up the database
+- Update the `appsettings.json` file with your SQL Server connection string.
+- Run the following commands to apply migrations and update the database:
+```
+dotnet ef database update
+```
+3. Run the application
+```
+dotnet run
+```
